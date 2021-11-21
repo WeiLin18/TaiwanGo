@@ -5,6 +5,7 @@ import {
   card as MuiCard,
   chip as MuiChip,
   button as MuiButton,
+  typography as MuiTypography,
 } from "styles";
 
 export default createTheme({
@@ -39,5 +40,6 @@ export default createTheme({
     MuiButton,
     MuiCard,
     MuiChip,
+    MuiTypography,
   },
 });

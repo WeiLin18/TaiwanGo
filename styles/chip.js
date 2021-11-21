@@ -7,7 +7,7 @@ const chip = {
   label: {
     paddingLeft: "8px",
     paddingRight: "8px",
-    fontWeight: 500,
+    fontWeight: 700,
   },
 };
 
