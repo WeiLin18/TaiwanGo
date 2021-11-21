@@ -10,7 +10,7 @@ import AppContext from "contexts/AppContext";
 
 import DropDownButton from "components/DropDownButton";
 import SearchBar from "components/SearchBar";
-import style from "./indexStyle";
+import style from "./index.style";
 
 export default function Home() {
   const { location, setLocation, type, setType } = useContext(AppContext);
