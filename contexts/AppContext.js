@@ -1,4 +1,4 @@
-import { useCallback, useRef, createContext, useEffect, useState } from "react";
+import { useCallback, useRef, createContext, useEffect } from "react";
 import apiTourism from "modules/tourism";
 import { CATEGORY_TYPES } from "constants/category";
 import { fetchListHandler } from "utils/handler";

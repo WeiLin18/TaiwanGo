@@ -1,5 +1,5 @@
 import { CATEGORY_TYPES } from "constants/category";
-import { DEFAULT_FILTER_QUERY } from "constants/service";
+import { BUILD_ITEM_COUNT, DEFAULT_FILTER_QUERY } from "constants/service";
 import apiTourism from "modules/tourism";
 import { getItemWithTypeList } from "./common";
 
@@ -114,7 +114,7 @@ export const getStaticPropHandlers =
 export const getStaticPathsHandler = (APIFunc) => async () => {
   try {
     const res = await APIFunc({
-      APIQuery: `${DEFAULT_FILTER_QUERY}&$select=ID&$top=1`,
+      APIQuery: `${DEFAULT_FILTER_QUERY}&$select=ID&$top=${BUILD_ITEM_COUNT}`,
     });
 
     const paths = res.map((item) => ({
