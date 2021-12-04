@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import { breakpoints } from "styles";
 
 const style = {
   root: css`
@@ -12,6 +13,10 @@ const style = {
     align-items: center;
     justify-content: center;
     padding: 0 5%;
+    @media (max-width: ${breakpoints.phone}) {
+      padding-top: 120px;
+      flex-direction: column-reverse;
+    }
   `,
   circle: css`
     position: absolute;
@@ -31,6 +36,9 @@ const style = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    @media (max-width: ${breakpoints.phone}) {
+      display: none;
+    }
   `,
   subtitleText: css`
     && {
@@ -43,6 +51,10 @@ const style = {
     width: 360px;
     z-index: 3;
     margin-left: -20px;
+    @media (max-width: ${breakpoints.phone}) {
+      margin-left: 0;
+      width: 100%;
+    }
   `,
   sectionTitle: css`
     && {
@@ -57,6 +69,11 @@ const style = {
   input: css`
     && {
       margin-bottom: 20px;
+    }
+  `,
+  girlImg: css`
+    @media (max-width: ${breakpoints.phone}) {
+      display: none !important;
     }
   `,
 };

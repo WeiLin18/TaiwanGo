@@ -44,6 +44,7 @@ const HomePage = () => {
           alt="travel-girl"
           priority={true}
           src="/Saly-1.png"
+          className={style.girlImg}
         />
         <section className={style.inputSection}>
           <Typography

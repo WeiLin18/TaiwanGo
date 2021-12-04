@@ -44,8 +44,7 @@ const CardGroup = ({ list = [] }) => {
 CardGroup.propTypes = {
   list: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.oneOfType(PropTypes.string, PropTypes.element)
-        .isRequired,
+      title: PropTypes.element.isRequired,
       iconElement: PropTypes.element.isRequired,
     })
   ),

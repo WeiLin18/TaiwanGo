@@ -85,14 +85,14 @@ const ListPage = () => {
               Array(8)
                 .fill("")
                 .map((item, index) => (
-                  <Grid item xs={6} md={3} key={index} component="li">
+                  <Grid item xs={12} sm={6} md={3} key={index} component="li">
                     <Card isLoading />
                   </Grid>
                 ))}
             {getListUIState(cardList) === LIST_UI_STATE.DATA && (
               <>
                 {cardList.data.map((item) => (
-                  <Grid item xs={6} md={3} key={item.ID} component="li">
+                  <Grid item xs={12} sm={6} md={3} key={item.ID} component="li">
                     <Card cardInfo={item} />
                   </Grid>
                 ))}

@@ -7,13 +7,16 @@ import GoText from "assets/GoText";
 import LineIcon from "assets/LineIcon";
 import FbIcon from "assets/FbIcon";
 import IgIcon from "assets/IgIcon";
-import { layout, colors } from "styles";
+import { layout, colors, breakpoints } from "styles";
 
 const style = {
   root: css`
     height: 300px;
     overflow: hidden;
     position: relative;
+    @media (max-width: ${breakpoints.pad}) {
+      height: 480px;
+    }
   `,
   circle: css`
     width: 2000px;
@@ -51,6 +54,9 @@ const style = {
   logo: css`
     margin-right: 20%;
     margin-bottom: 50px;
+    @media (max-width: ${breakpoints.pad}) {
+      margin-right: 36px;
+    }
   `,
   snsIconBox: css`
     margin-bottom: 24px;
@@ -85,7 +91,7 @@ const Footer = () => {
           </div>
           <Typography className={style.text}>聯絡專線：02xx-xxx-xxx</Typography>
           <Typography className={style.text}>
-            服務據點：台北市中山區明水路636號
+            服務據點：新北市板橋區xxx路xxx號
           </Typography>
         </div>
         <Typography variant="caption" className={style.license}>

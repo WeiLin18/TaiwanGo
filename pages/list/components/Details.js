@@ -18,10 +18,14 @@ import Card from "components/Card";
 import Footer from "components/Footer";
 import CardGroup from "components/CardGroup";
 import Hero from "../components/Hero";
-import { layout } from "styles";
+import { breakpoints, layout } from "styles";
 import useLikeToggle from "hooks/useLikeToggle";
 
 const style = {
+  root: css`
+    width: 100%;
+    padding-bottom: 96px;
+  `,
   mask: css`
     position: relative;
     z-index: 10;
@@ -84,6 +88,9 @@ const style = {
       transform: translate(-100%, -50%);
       background-color: #fff;
       box-shadow: 0px 2px 10px -1px rgb(0 0 0 / 20%);
+      @media (max-width: ${breakpoints.pad}) {
+        left: 44px;
+      }
     }
     &&:hover svg {
       opacity: 0.8;
@@ -157,37 +164,25 @@ const Details = ({
   nearSpotList = [],
   nearRestaurantList = [],
 }) => {
+  const { isLike, handleLikeToggle } = useLikeToggle(ID);
   return (
-    <main className={style.root}>
-      <Hero imgURL={Picture?.PictureUrl1} />
-      <div className={style.mask}>
-        <article className={clx(layout.container, style.article)}>
-          <Typography variant="h4" component="h2" className={style.title}>
-            <Link
-              href={{
-                pathname: `/list`,
-              }}
-              passHref
-            >
-              <IconButton className={style.backIcon}>
-                <ArrowBack />
-              </IconButton>
-            </Link>
-            {Name}
-          </Typography>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={8}>
-              <Typography component="p" className={style.description}>
-                {DescriptionDetail || Description || "未提供相關資訊"}
-              </Typography>
-              {Position?.PositionLat && (
-                <iframe
-                  title="map"
-                  src={`https://maps.google.com/maps?q=${Position.PositionLat},${Position.PositionLon}&hl=zh-TW&z=16&output=svembed`}
-                  width="100%"
-                  height="400"
-                  allowFullScreen
-                  loading="lazy"
+    <>
+      <main className={style.root}>
+        <Hero imgURL={Picture?.PictureUrl1} />
+        <div className={style.mask}>
+          <article className={clx(layout.container, style.article)}>
+            <Typography variant="h4" component="h2" className={style.title}>
+              <Link
+                href={{
+                  pathname: `/list`,
+                }}
+                passHref
+              >
+                <IconButton className={style.backIcon}>
+                  <ArrowBack />
+                </IconButton>
+              </Link>
+              {Name}
               <Button
                 variant="outlined"
                 color="primary"
@@ -199,43 +194,62 @@ const Details = ({
               >
                 {isLike ? "已收藏" : "加收藏"}
               </Button>
+            </Typography>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={8}>
+                <Typography component="p" className={style.description}>
+                  {DescriptionDetail || Description || "未提供相關資訊"}
+                </Typography>
+                {Position?.PositionLat && (
+                  <iframe
+                    title="map"
+                    src={`https://maps.google.com/maps?q=${Position.PositionLat},${Position.PositionLon}&hl=zh-TW&z=16&output=svembed`}
+                    width="100%"
+                    height="400"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                )}
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <CardGroup
+                  list={cardList(OpenTime, City, ZipCode, WebsiteUrl, Phone)}
                 />
-              )}
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <CardGroup
-                list={cardList(OpenTime, City, ZipCode, WebsiteUrl, Phone)}
-              />
+          </article>
+        </div>
+        {nearSpotList?.length >= 4 && (
+          <ul className={clx(layout.container, style.list)}>
+            <Typography variant="h5" className={style.recommendTitle}>
+              附近景點
+            </Typography>
+            <Grid container spacing={2}>
+              {nearSpotList.map((item, index) => (
+                <Grid item xs={12} sm={6} md={3} component="li" key={index}>
+                  <Card cardInfo={item} />
+                </Grid>
+              ))}
             </Grid>
-          </Grid>
-        </article>
-      </div>
-      <ul className={clx(layout.container, style.list)}>
-        <Typography variant="h5" className={style.recommendTitle}>
-          附近景點
-        </Typography>
-        <Grid container spacing={2}>
-          {nearSpotList.map((item, index) => (
-            <Grid item xs={6} md={3} component="li" key={index}>
-              <Card cardInfo={item} />
+          </ul>
+        )}
+        {nearRestaurantList?.length >= 4 && (
+          <ul className={clx(layout.container, style.list, style.contentSpec)}>
+            <Typography variant="h5" className={style.recommendTitle}>
+              附近餐廳
+            </Typography>
+            <Grid container spacing={2}>
+              {nearRestaurantList.map((item, index) => (
+                <Grid item xs={12} sm={6} md={3} component="li" key={index}>
+                  <Card cardInfo={item} />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-      </ul>
-      <ul className={clx(layout.container, style.list, style.contentSpec)}>
-        <Typography variant="h5" className={style.recommendTitle}>
-          附近餐廳
-        </Typography>
-        <Grid container spacing={2}>
-          {nearRestaurantList.map((item, index) => (
-            <Grid item xs={6} md={3} component="li" key={index}>
-              <Card cardInfo={item} />
-            </Grid>
-          ))}
-        </Grid>
-      </ul>
+          </ul>
+        )}
+      </main>
       <Footer />
-    </main>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ const style = {
   root: css`
     display: inline-block;
     width: 100%;
+    min-width: 40px;
     height: 48px;
     font-size: 16px;
     border: none;

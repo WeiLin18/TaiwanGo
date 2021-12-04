@@ -49,7 +49,7 @@ const apiTourism = {
       typeValue === CATEGORY_TYPES.RESTAURANT ? "Class" : "Class1"
     }&$spatialFilter=nearby(${position?.PositionLat},${
       position?.PositionLon
-    },20000)${DEFAULT_FILTER_QUERY} and ID ne '${targetId}'`;
+    },2000)${DEFAULT_FILTER_QUERY} and ID ne '${targetId}'`;
     return await apiTourism.getListApiFunc(typeValue)({
       APIQuery: APIQuery,
       tokenSource: tokenSource,

@@ -74,6 +74,13 @@ const style = {
   locationName: css`
     && {
       font-size: 18px;
+      height: 57px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      white-space: normal;
     }
   `,
   locationInfo: css`

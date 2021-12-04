@@ -3,8 +3,14 @@ import clx from "classnames";
 import { layout } from "styles";
 
 const style = {
-  hero: css`
+  root: css`
     width: 100vw;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+  `,
+  hero: css`
+    width: 100%;
     height: 400px;
     transform: scale(1.1);
     background-size: cover;
@@ -24,7 +30,7 @@ const style = {
 
 const Hero = ({ imgURL }) => {
   return (
-    <>
+    <header className={style.root}>
       <div
         style={{
           backgroundImage: imgURL
@@ -41,7 +47,7 @@ const Hero = ({ imgURL }) => {
         }}
         className={clx(style.heroImg, layout.container)}
       />
-    </>
+    </header>
   );
 };
 
