@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { Link, Typography } from "@material-ui/core";
 import { css } from "@emotion/css";
 import clx from "classnames";
 
@@ -89,9 +89,47 @@ const Footer = () => {
             <FbIcon className={style.snsIcon} />
             <IgIcon />
           </div>
-          <Typography className={style.text}>聯絡專線：02xx-xxx-xxx</Typography>
           <Typography className={style.text}>
-            服務據點：新北市板橋區xxx路xxx號
+            UI Design：
+            <Link
+              variant="body2"
+              color="#fff"
+              href="https://2021.thef2e.com/users/6296427084285739362?week=1&type=1"
+              underline="hover"
+            >
+              Rey Chang
+            </Link>{" "}
+            /{" "}
+            <Link
+              variant="body2"
+              color="#fff"
+              href="https://www.figma.com/file/YQ0Q6Gbj8YRVSntbVXcTPy/Week-1-%7C-%E5%8F%B0%E7%81%A3%E6%97%85%E9%81%8A%E6%99%AF%E9%BB%9E%E5%B0%8E%E8%A6%BD?node-id=0%3A1"
+              underline="hover"
+            >
+              Mockup (original version)
+            </Link>
+          </Typography>
+          <Typography className={style.text}>
+            Website Development：
+            <Link
+              variant="body2"
+              color="#fff"
+              href="https://github.com/WeiLin18"
+              underline="hover"
+            >
+              Wei Lin
+            </Link>
+          </Typography>
+          <Typography className={style.text}>
+            Source Data：
+            <Link
+              variant="body2"
+              color="#fff"
+              href="https://ptx.transportdata.tw/PTX/"
+              underline="hover"
+            >
+              交通部PTX服務平臺
+            </Link>
           </Typography>
         </div>
         <Typography variant="caption" className={style.license}>
