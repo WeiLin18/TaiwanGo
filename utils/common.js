@@ -1,5 +1,5 @@
 import zipCode from "constants/zipCode";
-import {  CLASS_TYPES_LIST } from "constants/category";
+import { CLASS_TYPES_LIST } from "constants/category";
 import { LIST_UI_STATE } from "constants/UIState";
 
 export const getListUIState = (listState) => {
@@ -43,7 +43,7 @@ export const findTargetObject = (target, prop, list) => {
   return list.find((item) => item[prop] === target);
 };
 
-export const getItemWithTypeList = (list,type) =>
+export const getItemWithTypeList = (list, type) =>
   list.map((item) => ({
     ...item,
     typeValue: type,

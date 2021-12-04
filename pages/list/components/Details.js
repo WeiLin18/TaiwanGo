@@ -116,7 +116,7 @@ const cardList = (OpenTime, City, ZipCode, WebsiteUrl, Phone) => [
         <Typography variant="subtitle1" component="div">
           地區:
         </Typography>
-        {City} {getLocationName(ZipCode, true)}
+        {City} {getLocationName(ZipCode, City?.length > 0)}
       </>
     ),
     iconElement: <Room />,
@@ -185,14 +185,12 @@ const Details = ({
               {Name}
               <Button
                 variant="outlined"
-                color="primary"
+                // color="primary"
                 className={style.likeBtn}
-                startIcon={
-                  isLike ? <Favorite color="error" /> : <FavoriteBorder />
-                }
+                startIcon={isLike ? <Favorite /> : <FavoriteBorder />}
                 onClick={handleLikeToggle}
               >
-                {isLike ? "已收藏" : "加收藏"}
+                {isLike ? "取消收藏" : "加入收藏"}
               </Button>
             </Typography>
             <Grid container spacing={3}>

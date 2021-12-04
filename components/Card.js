@@ -5,9 +5,10 @@ import {
   Card as MuiCard,
   Chip,
   IconButton,
+  Tooltip,
   Typography,
 } from "@material-ui/core";
-import { Room, FavoriteBorder, Favorite } from "@material-ui/icons";
+import { Room, Favorite, FavoriteBorder } from "@material-ui/icons";
 import { css } from "@emotion/css";
 import clx from "classnames";
 import { getChipColor, getLocationName } from "utils/common";
@@ -62,6 +63,9 @@ const style = {
       right: 16px;
       top: 16px;
       background-color: #fff;
+    }
+    && svg {
+      fill: ${colors.textPrimary};
     }
   `,
   chip: css`
@@ -159,10 +163,18 @@ const Card = ({
                 <Room fontSize="small" />
                 {Location || getLocationName(ZipCode)}
               </Typography>
-
-              <IconButton className={style.likeBtn} onClick={handleLikeToggle}>
-                {isLike ? <Favorite color="error" /> : <FavoriteBorder />}
-              </IconButton>
+              <Tooltip
+                title={isLike ? "取消收藏" : "加入收藏"}
+                placement="top"
+                enterDelay={500}
+              >
+                <IconButton
+                  className={style.likeBtn}
+                  onClick={handleLikeToggle}
+                >
+                  {isLike ? <Favorite /> : <FavoriteBorder />}
+                </IconButton>
+              </Tooltip>
             </div>
           </MuiCard>
         </Link>

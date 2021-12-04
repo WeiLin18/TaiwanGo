@@ -16,6 +16,9 @@ const button = {
     fontSize: "16px",
     fontWeight: 500,
   },
+  outlined: {
+    borderColor: colors.textPrimary,
+  },
   contained: {
     "&&:hover": {
       boxShadow: "0px 2px 10px -1px rgb(0 0 0 / 20%)",
