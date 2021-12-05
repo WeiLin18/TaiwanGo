@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { Typography, Grid, IconButton } from "@material-ui/core";
+import { Typography, Grid, IconButton, Button } from "@material-ui/core";
 import {
   ArrowBack,
   Room,
   Phone as PhoneIcon,
   AccessTimeRounded,
   Public,
+  Favorite,
+  FavoriteBorder,
 } from "@material-ui/icons";
 import { css } from "@emotion/css";
 import clx from "classnames";
@@ -17,6 +19,7 @@ import Footer from "components/Footer";
 import CardGroup from "components/CardGroup";
 import Hero from "../components/Hero";
 import { layout } from "styles";
+import useLikeToggle from "hooks/useLikeToggle";
 
 const style = {
   mask: css`
@@ -40,6 +43,13 @@ const style = {
       margin-bottom: 36px;
       letter-spacing: 3px;
       position: relative;
+      display: flex;
+      align-items: center;
+    }
+  `,
+  likeBtn: css`
+    && {
+      margin-left: 20px;
     }
   `,
   description: css`
@@ -133,6 +143,7 @@ const cardList = (OpenTime, City, ZipCode, WebsiteUrl, Phone) => [
 ];
 
 const Details = ({
+  ID = "",
   Name = "",
   DescriptionDetail = "",
   Description = "",
@@ -177,6 +188,17 @@ const Details = ({
                   height="400"
                   allowFullScreen
                   loading="lazy"
+              <Button
+                variant="outlined"
+                color="primary"
+                className={style.likeBtn}
+                startIcon={
+                  isLike ? <Favorite color="error" /> : <FavoriteBorder />
+                }
+                onClick={handleLikeToggle}
+              >
+                {isLike ? "已收藏" : "加收藏"}
+              </Button>
                 />
               )}
             </Grid>

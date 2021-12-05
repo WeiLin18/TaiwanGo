@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import { Skeleton } from "@material-ui/lab";
@@ -14,6 +13,7 @@ import clx from "classnames";
 import { getChipColor, getLocationName } from "utils/common";
 import { colors } from "styles";
 import { CATEGORY_TYPES } from "constants/category";
+import useLikeToggle from "hooks/useLikeToggle";
 
 const style = {
   root: css`
@@ -84,7 +84,6 @@ const style = {
 
 const Card = ({
   isLoading = false,
-  isLiked = false,
   cardInfo = {
     ID: "",
     Name: "",
@@ -98,6 +97,7 @@ const Card = ({
   const { ID, Name, ZipCode, Location, Class, Class1, Picture, typeValue } =
     cardInfo;
   const { PictureUrl1 } = Picture;
+  const { isLike, handleLikeToggle } = useLikeToggle(ID);
 
   return (
     <>
@@ -153,8 +153,8 @@ const Card = ({
                 {Location || getLocationName(ZipCode)}
               </Typography>
 
-              <IconButton className={style.likeBtn}>
-                {isLiked ? <Favorite color="error" /> : <FavoriteBorder />}
+              <IconButton className={style.likeBtn} onClick={handleLikeToggle}>
+                {isLike ? <Favorite color="error" /> : <FavoriteBorder />}
               </IconButton>
             </div>
           </MuiCard>

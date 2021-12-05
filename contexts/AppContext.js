@@ -1,10 +1,11 @@
-import { useCallback, createContext } from "react";
+import { useCallback, useRef, createContext, useEffect, useState } from "react";
 import apiTourism from "modules/tourism";
 import { CATEGORY_TYPES } from "constants/category";
 import { fetchListHandler } from "utils/handler";
 import useSnackbar from "hooks/useSnackbar";
 
 const AppContext = createContext({
+  likeItemsList: [],
   fetchCardList: () => {},
   fetchCityCardList: () => {},
   handleItemSearch: () => {},
@@ -25,11 +26,18 @@ export const AppProvider = ({ children }) => {
     },
     [showErrorSnackbar]
   );
+  // const [likeItemsList, setLikeItemsList] = useState(undefined);
+  const likeItemsList = useRef([]);
 
-  // const likeItems = localStorage.getItem("likedList") || "";
-  // const likeItemsList = likeItems.length > 0 ? JSON.parse(likeItems) : [];
+  useEffect(() => {
+    const likeItemsString = localStorage.getItem("likedList") || "";
+    const likeItemsArr =
+      likeItemsString.length > 0 ? JSON.parse(likeItemsString) : [];
 
-  // https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/Taipei?$top=18&$skip=0&$format=JSON&$select=ID,Name,Address,Picture,Class1,Class2,Class3,OpenTime,TicketInfo&$filter=Picture/PictureUrl1%20ne%20null%20and%20(contains(Name,%27%E7%89%9B%27)%20or%20contains(Class1,%27%E7%89%9B%27)%20or%20contains(Class2,%27%E7%89%9B%27)%20or%20contains(Class3,%27%E7%89%9B%27))
+    likeItemsList.current = likeItemsArr;
+  }, []);
+
+  // const likeItemsList = useRef(likeItemsArr);
 
   const fetchCardList = useCallback(
     async ({
@@ -107,6 +115,7 @@ export const AppProvider = ({ children }) => {
     fetchCardList,
     fetchCityCardList,
     handleItemSearch,
+    likeItemsList,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
