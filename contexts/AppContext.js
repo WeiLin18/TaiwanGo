@@ -35,16 +35,17 @@ export const AppProvider = ({ children }) => {
     async ({ setState, typeValue, inputValue, itemCount = 32 }) => {
       fetchListHandler({
         setState,
-        APIFunc: _getListApiFunc(typeValue),
+        typeValue,
+        APIFunc: apiTourism.getListApiFunc(typeValue),
         APIQuery: `$top=${itemCount}&$select=ID%2CName%2CPicture%2C${
           typeValue === CATEGORY_TYPES.ACTIVITY ? "Location" : "ZipCode"
         }%2C${
           typeValue === CATEGORY_TYPES.RESTAURANT ? "Class" : "Class1"
-        }${_getFilterQuery(inputValue)}`,
+        }${apiTourism.getFilterQuery(inputValue)}`,
         APIErrorHandler: _APIErrorHandler,
       });
     },
-    [_getFilterQuery, _getListApiFunc, _APIErrorHandler]
+    [_APIErrorHandler]
   );
 
   const fetchCityCardList = useCallback(
@@ -58,16 +59,17 @@ export const AppProvider = ({ children }) => {
       fetchListHandler({
         setState,
         city: locationValue,
-        APIFunc: _getListApiFunc(typeValue, true),
+        typeValue,
+        APIFunc: apiTourism.getListApiFunc(typeValue, true),
         APIQuery: `$top=${itemCount}&$select=ID%2CName%2CPicture%2C${
           typeValue === CATEGORY_TYPES.ACTIVITY ? "Location" : "ZipCode"
         }%2C${
           typeValue === CATEGORY_TYPES.RESTAURANT ? "Class" : "Class1"
-        }${_getFilterQuery(inputValue)}`,
+        }${apiTourism.getFilterQuery(inputValue)}`,
         APIErrorHandler: _APIErrorHandler,
       });
     },
-    [_getFilterQuery, _getListApiFunc, _APIErrorHandler]
+    [_APIErrorHandler]
   );
   const handleItemSearch = useCallback(
     async ({ setState, locationValue, typeValue, inputValue }) => {

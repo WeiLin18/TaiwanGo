@@ -13,6 +13,7 @@ import Card from "../../components/Card";
 import Footer from "../../components/Footer";
 import { layout } from "styles";
 import EmptyView from "components/EmptyView";
+import { CATEGORY_TYPES_LIST } from "constants/category";
 
 const style = {
   list: css`
@@ -33,7 +34,10 @@ const ListPage = () => {
   const { fetchCardList, handleItemSearch } = useContext(AppContext);
 
   useEffect(() => {
-    fetchCardList({ setState: setCardList });
+    fetchCardList({
+      setState: setCardList,
+      typeValue: CATEGORY_TYPES_LIST[0].value,
+    });
   }, [fetchCardList]);
 
   const handleSearchClick = useCallback(
@@ -43,18 +47,19 @@ const ListPage = () => {
     [handleItemSearch]
   );
 
-  console.log(cardList);
   return (
     <main>
       <Header onSearch={handleSearchClick} />
       <ul className={clx(layout.container, style.list)}>
         <Grid container spacing={2}>
           {getListUIState(cardList) === LIST_UI_STATE.LOADING &&
-            [1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-              <Grid item xs={6} md={3} key={item} component="li">
-                <Card isLoading />
-              </Grid>
-            ))}
+            Array(8)
+              .fill("")
+              .map((item, index) => (
+                <Grid item xs={6} md={3} key={index} component="li">
+                  <Card isLoading />
+                </Grid>
+              ))}
           {getListUIState(cardList) === LIST_UI_STATE.DATA &&
             cardList.data.map((item) => (
               <Grid item xs={6} md={3} key={item.ID} component="li">

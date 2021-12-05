@@ -35,6 +35,26 @@ const apiTourism = {
         return apiTourism.getCitySpotList;
     }
   },
+
+  getNearList: async ({
+    typeValue,
+    position,
+    targetId,
+    itemCount = 4,
+    tokenSource,
+  } = {}) => {
+    const APIQuery = `$top=${itemCount}&$select=ID%2CName%2CPicture%2C${
+      typeValue === CATEGORY_TYPES.ACTIVITY ? "Location" : "ZipCode"
+    }%2C${
+      typeValue === CATEGORY_TYPES.RESTAURANT ? "Class" : "Class1"
+    }&$spatialFilter=nearby(${position?.PositionLat},${
+      position?.PositionLon
+    },20000)${DEFAULT_FILTER_QUERY} and ID ne '${targetId}'`;
+    return await apiTourism.getListApiFunc(typeValue)({
+      APIQuery: APIQuery,
+      tokenSource: tokenSource,
+    });
+  },
   /**
    * @reference https://ptx.transportdata.tw/MOTC?t=Tourism&v=2#!/Tourism/TourismApi_ScenicSpot
    */

@@ -7,9 +7,9 @@ const DetailsPage = (props) => {
   return <Details {...props} />;
 };
 
-export const getStaticPaths = getStaticPathsHandler(apiTourism.getSpotList);
+export const getStaticPaths = getStaticPathsHandler(apiTourism.getActivityList);
 
-export const getStaticProps = getStaticPropHandlers(apiTourism.getSpotList);
+export const getStaticProps = getStaticPropHandlers(apiTourism.getActivityList);
 
 DetailsPage.propTypes = {
   Name: PropTypes.string,

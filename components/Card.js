@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import PropTypes from "prop-types";
 import { Skeleton } from "@material-ui/lab";
 import {
@@ -12,6 +13,7 @@ import { css } from "@emotion/css";
 import clx from "classnames";
 import { getChipColor, getLocationName } from "utils/common";
 import { colors } from "styles";
+import { CATEGORY_TYPES } from "constants/category";
 
 const style = {
   root: css`
@@ -89,10 +91,12 @@ const Card = ({
     ZipCode: "",
     Class1: "",
     Picture: { PictureUrl1: "" },
+    typeValue: CATEGORY_TYPES.SCENICSPOT.toLowerCase(),
   },
   ...props
 }) => {
-  const { ID, Name, ZipCode, Location, Class, Class1, Picture } = cardInfo;
+  const { ID, Name, ZipCode, Location, Class, Class1, Picture, typeValue } =
+    cardInfo;
   const { PictureUrl1 } = Picture;
 
   return (
@@ -105,45 +109,52 @@ const Card = ({
           {...props}
         />
       ) : (
-        <MuiCard className={clx(style.root, style.paper)} {...props}>
-          <div
-            className={clx(style.paper, style.cover, "cover")}
-            style={{
-              backgroundImage: `linear-gradient(
+        <Link
+          href={{
+            pathname: `/list/${typeValue}/${ID}`,
+          }}
+          passHref
+        >
+          <MuiCard className={clx(style.root, style.paper)} {...props}>
+            <div
+              className={clx(style.paper, style.cover, "cover")}
+              style={{
+                backgroundImage: `linear-gradient(
             0deg,
             rgba(0, 0, 0, 60%) 0%,
             transparent 100%
           ),url(${PictureUrl1})`,
-            }}
-          />
-          <div className={style.textContent}>
-            <Chip
-              label={Class ? Class || "美食類" : Class1 || "景點類"}
-              className={style.chip}
-              style={{ backgroundColor: getChipColor(Class1) }}
+              }}
             />
-            <Typography
-              variant="h6"
-              color="textSecondary"
-              className={style.locationName}
-            >
-              {Name}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={style.locationInfo}
-            >
-              <Room fontSize="small" />
-              {Location || getLocationName(ZipCode)}
-            </Typography>
+            <div className={style.textContent}>
+              <Chip
+                label={Class ? Class || "美食類" : Class1 || "景點類"}
+                className={style.chip}
+                style={{ backgroundColor: getChipColor(Class1) }}
+              />
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                className={style.locationName}
+              >
+                {Name}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                className={style.locationInfo}
+              >
+                <Room fontSize="small" />
+                {Location || getLocationName(ZipCode)}
+              </Typography>
 
-            <IconButton className={style.likeBtn}>
-              {isLiked ? <Favorite color="error" /> : <FavoriteBorder />}
-            </IconButton>
-          </div>
-        </MuiCard>
+              <IconButton className={style.likeBtn}>
+                {isLiked ? <Favorite color="error" /> : <FavoriteBorder />}
+              </IconButton>
+            </div>
+          </MuiCard>
+        </Link>
       )}
     </>
   );
