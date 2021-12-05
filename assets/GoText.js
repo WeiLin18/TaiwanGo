@@ -1,4 +1,4 @@
-const GoText = ({ width = 400 }) => (
+const GoText = ({ width = 400, ...props }) => (
   <svg
     width={width}
     height={(width * 3) / 4}
@@ -6,6 +6,7 @@ const GoText = ({ width = 400 }) => (
     fill="none"
     alt="lets' go"
     xmlns="http://www.w3.org/2000/svg"
+    {...props}
   >
     <path
       d="M2.59104 4.94716H7.63305V118.732H2.59104V4.94716ZM32.8431 4.94716H37.8852V93.9961H78.2213V98.9432H37.8852V103.89H78.2213V108.838H37.8852V113.785H78.2213V118.732H32.8431V4.94716ZM22.7591 4.94716H27.8011V118.732H22.7591V4.94716ZM12.6751 4.94716H17.7171V118.732H12.6751V4.94716Z"
