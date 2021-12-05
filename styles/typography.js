@@ -14,6 +14,11 @@ const typography = {
     fontSize: "24px",
     fontWeight: 700,
   },
+  subtitle1: {
+    ...bodyFontStyle,
+    fontSize: "16px",
+    fontWeight: 700,
+  },
   body2: {
     ...bodyFontStyle,
     fontSize: "14px",

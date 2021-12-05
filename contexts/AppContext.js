@@ -1,6 +1,7 @@
 import { useCallback, createContext } from "react";
 import apiTourism from "modules/tourism";
 import { CATEGORY_TYPES } from "constants/category";
+import { DEFAULT_FILTER_QUERY } from "constants/service";
 import { fetchListHandler } from "utils/handler";
 import useSnackbar from "hooks/useSnackbar";
 
@@ -32,9 +33,8 @@ export const AppProvider = ({ children }) => {
   // https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/Taipei?$top=18&$skip=0&$format=JSON&$select=ID,Name,Address,Picture,Class1,Class2,Class3,OpenTime,TicketInfo&$filter=Picture/PictureUrl1%20ne%20null%20and%20(contains(Name,%27%E7%89%9B%27)%20or%20contains(Class1,%27%E7%89%9B%27)%20or%20contains(Class2,%27%E7%89%9B%27)%20or%20contains(Class3,%27%E7%89%9B%27))
 
   const _getFilterQuery = useCallback((inputValue) => {
-    const defaultFilterQuery = `&$filter=Picture/PictureUrl1 ne null`;
     if (!inputValue || inputValue.trim().length === 0) {
-      return defaultFilterQuery;
+      return DEFAULT_FILTER_QUERY;
     }
 
     const keywordList = inputValue.split(" ");
@@ -42,7 +42,7 @@ export const AppProvider = ({ children }) => {
       .map((k) => `contains(Name,'${k}') or contains(Description,'${k}')`)
       .join(" or ");
 
-    return `${defaultFilterQuery} and (${keywordQuery})`;
+    return `${DEFAULT_FILTER_QUERY} and (${keywordQuery})`;
   }, []);
 
   const _getListApiFunc = useCallback((typeValue, isTargetCity = false) => {

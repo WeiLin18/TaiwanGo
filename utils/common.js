@@ -15,7 +15,7 @@ export const getListUIState = (listState) => {
   return LIST_UI_STATE.LOADING;
 };
 
-export const getLocationName = (targetCode) => {
+export const getLocationName = (targetCode, isGetArea = false) => {
   let targetAreaName;
   const targetCity = zipCode.cities.find((city) =>
     city.region.some((area) => {
@@ -26,7 +26,13 @@ export const getLocationName = (targetCode) => {
       return false;
     })
   );
-  return targetCity?.name ? `${targetCity?.name}.${targetAreaName}` : `未知名`;
+  if (targetCity?.name) {
+    return isGetArea
+      ? `${targetAreaName}`
+      : `${targetCity?.name}.${targetAreaName}`;
+  } else {
+    return "未知名";
+  }
 };
 
 export const getChipColor = (targetValue) => {
