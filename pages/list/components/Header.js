@@ -1,11 +1,13 @@
-import { useContext } from "react";
+import { useState } from "react";
 import { Button, Typography } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { css } from "@emotion/css";
 import clx from "classnames";
 
-import { CATEGORY_TYPES, CATEGORY_LOCATIONS } from "constants/category";
-import AppContext from "contexts/AppContext";
+import {
+  CATEGORY_TYPES_LIST,
+  CATEGORY_LOCATIONS_LIST,
+} from "constants/category";
 import DropDownButton from "components/DropDownButton";
 import SearchBar from "components/SearchBar";
 
@@ -57,8 +59,10 @@ const style = {
   `,
 };
 
-const Header = () => {
-  const { location, setLocation, type, setType } = useContext(AppContext);
+const Header = ({ onSearch }) => {
+  const [location, setLocation] = useState(CATEGORY_LOCATIONS_LIST[0]);
+  const [type, setType] = useState(CATEGORY_TYPES_LIST[0]);
+  const [inputValue, setInputValue] = useState("");
 
   return (
     <header className={style.root}>
@@ -73,7 +77,7 @@ const Header = () => {
         <DropDownButton
           labelName="區域"
           currentItem={location}
-          list={CATEGORY_LOCATIONS}
+          list={CATEGORY_LOCATIONS_LIST}
           onItemClick={(targetRange) => {
             setLocation(targetRange);
           }}
@@ -82,7 +86,7 @@ const Header = () => {
         <DropDownButton
           labelName="種類"
           currentItem={type}
-          list={CATEGORY_TYPES}
+          list={CATEGORY_TYPES_LIST}
           onItemClick={(targetType) => {
             setType(targetType);
           }}
@@ -90,6 +94,10 @@ const Header = () => {
         />
         <SearchBar
           placeholder="輸入關鍵字..."
+          value={inputValue}
+          onValueChange={(vewValue) => {
+            setInputValue(vewValue);
+          }}
           customClassName={clx(style.input, style.boxShadow)}
         />
         <Button
@@ -97,6 +105,13 @@ const Header = () => {
           color="primary"
           className={style.boxShadow}
           startIcon={<Search />}
+          onClick={() => {
+            onSearch({
+              locationValue: location.value,
+              typeValue: type.value,
+              inputValue,
+            });
+          }}
         >
           搜尋
         </Button>

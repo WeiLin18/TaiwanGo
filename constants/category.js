@@ -1,12 +1,26 @@
 import { colors } from "styles";
 
-export const CATEGORY_TYPES = [
-  { name: "景點", value: "ScenicSpot", chipColor: colors.greenAlly },
-  { name: "美食", value: "Restaurant", chipColor: colors.redA11y },
-  { name: "活動", value: "Activity", chipColor: colors.blueA11y },
+export const CATEGORY_TYPES = {
+  SCENICSPOT: "ScenicSpot",
+  RESTAURANT: "Restaurant",
+  ACTIVITY: "Activity",
+};
+
+export const CATEGORY_TYPES_LIST = [
+  { name: "景點", value: CATEGORY_TYPES.SCENICSPOT },
+  { name: "美食", value: CATEGORY_TYPES.RESTAURANT },
+  { name: "活動", value: CATEGORY_TYPES.ACTIVITY },
 ];
 
-export const CATEGORY_LOCATIONS = [
+export const CLASS_TYPES_LIST = [
+  { value: "景點類", chipColor: colors.yellow },
+  { value: "遊憩類", chipColor: colors.greenAlly },
+  { value: "自然風景類", chipColor: colors.blueA11y },
+  { value: "溫泉類", chipColor: colors.blueA11y },
+];
+
+export const CATEGORY_LOCATIONS_LIST = [
+  { name: "全台灣", value: "All" },
   { name: "臺北市", value: "Taipei" },
   { name: "新北市", value: "NewTaipei" },
   { name: "桃園市", value: "Taoyuan" },

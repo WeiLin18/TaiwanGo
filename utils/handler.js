@@ -1,18 +1,3 @@
-import { showErrorSnackbar } from "hooks/useSnackbar";
-
-/**
- * For error handling when call API failed
- *
- * @param {number} status api response status
- */
-export const errorHandler = ({ status, data }) => {
-  if (status >= 500) {
-    showErrorSnackbar({ msg: data || "Server is temporary out of service" });
-  } else if (status >= 400) {
-    showErrorSnackbar({ msg: data || "Bad api request" });
-  }
-};
-
 /**
  * For fetching API UI State handling
  *
@@ -20,10 +5,16 @@ export const errorHandler = ({ status, data }) => {
  * @param {function} APIFunc fetch API function
  * @param {object} APIFuncProp fetch API function prop
  */
-export const fetchListHandler = async ({ setState, APIFunc, APIQuery }) => {
+export const fetchListHandler = async ({
+  setState,
+  APIFunc,
+  APIQuery,
+  APIErrorHandler,
+  ...props
+}) => {
   setState((prev) => ({ ...prev, isLoading: true }));
   try {
-    const res = await APIFunc({ APIQuery });
+    const res = await APIFunc({ APIQuery, ...props });
     setState((prev) => ({
       ...prev,
       isLoading: false,
@@ -31,12 +22,13 @@ export const fetchListHandler = async ({ setState, APIFunc, APIQuery }) => {
       isError: false,
       data: res,
     }));
-  } catch {
+  } catch (error) {
     setState((prev) => ({
       ...prev,
       isLoading: false,
       isFetched: true,
       isError: true,
     }));
+    APIErrorHandler && APIErrorHandler(error);
   }
 };

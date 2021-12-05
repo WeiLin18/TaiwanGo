@@ -20,10 +20,20 @@ const style = {
     }
   `,
 };
-const SearchBar = ({ placeholder, customClassName, ...props }) => {
+const SearchBar = ({
+  value,
+  placeholder,
+  onValueChange,
+  customClassName,
+  ...props
+}) => {
   return (
     <input
       type="text"
+      value={value}
+      onChange={(e) => {
+        onValueChange(e.target.value);
+      }}
       placeholder={placeholder}
       className={clx(style.root, customClassName)}
       {...props}

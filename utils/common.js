@@ -1,4 +1,5 @@
 import zipCode from "constants/zipCode";
+import { CLASS_TYPES_LIST } from "constants/category";
 import { LIST_UI_STATE } from "constants/UIState";
 
 export const getListUIState = (listState) => {
@@ -26,4 +27,8 @@ export const getLocationName = (targetCode) => {
     })
   );
   return targetCity?.name ? `${targetCity?.name}.${targetAreaName}` : `未知名`;
+};
+
+export const getChipColor = (targetValue) => {
+  return CLASS_TYPES_LIST.find((item) => item.value === targetValue)?.chipColor;
 };

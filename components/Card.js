@@ -9,15 +9,28 @@ import {
 } from "@material-ui/core";
 import { Room, FavoriteBorder, Favorite } from "@material-ui/icons";
 import { css } from "@emotion/css";
-import { getLocationName } from "utils/common";
+import clx from "classnames";
+import { getChipColor, getLocationName } from "utils/common";
+import { colors } from "styles";
 
 const style = {
   root: css`
-    min-width: 245px;
+    min-width: 250px;
+    overflow: hidden;
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
     display: flex;
+    &:hover .cover {
+      transition: transform 1.5s;
+      transform: scale(1.2);
+    }
+  `,
+  paper: css`
     background-image: linear-gradient(
         0deg,
-        rgba(0, 0, 0, 50%) 0%,
+        rgba(0, 0, 0, 60%) 0%,
         transparent 100%
       ),
       url("/unsplash_78A265wPiO4.png");
@@ -25,23 +38,16 @@ const style = {
     background-repeat: no-repeat;
     background-position: center bottom, center;
   `,
-  paper: css`
+  cover: css`
+    position: absolute;
     width: 100%;
-    padding: 20px;
-    background-image: linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 50%) 0%,
-        transparent 100%
-      ),
-      url("/unsplash_78A265wPiO4.png");
-    background-size: 100% 120px, cover;
-    background-repeat: no-repeat;
-    background-position: center bottom, center;
+    height: 100%;
+  `,
+  textContent: css`
+    width: 100%;
+    padding: 12px;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
+    z-index: 10;
   `,
   skeleton: css`
     border-radius: 16px;
@@ -58,8 +64,14 @@ const style = {
   `,
   chip: css`
     && {
-      background-color: #00ba88;
-      margin-bottom: 12px;
+      background-color: ${colors.yellowA11y};
+      margin-top: 140px;
+      margin-bottom: 8px;
+    }
+  `,
+  locationName: css`
+    && {
+      font-size: 18px;
     }
   `,
   locationInfo: css`
@@ -71,11 +83,18 @@ const style = {
 const Card = ({
   isLoading = false,
   isLiked = false,
-  cardInfo = { ID: "", Name: "", ZipCode: "", Picture: { PictureUrl1: "" } },
+  cardInfo = {
+    ID: "",
+    Name: "",
+    ZipCode: "",
+    Class1: "",
+    Picture: { PictureUrl1: "" },
+  },
   ...props
 }) => {
-  const { ID, Name, ZipCode, Picture } = cardInfo;
+  const { ID, Name, ZipCode, Location, Class, Class1, Picture } = cardInfo;
   const { PictureUrl1 } = Picture;
+
   return (
     <>
       {isLoading ? (
@@ -86,19 +105,28 @@ const Card = ({
           {...props}
         />
       ) : (
-        <MuiCard className={style.root} {...props}>
+        <MuiCard className={clx(style.root, style.paper)} {...props}>
           <div
-            className={style.paper}
+            className={clx(style.paper, style.cover, "cover")}
             style={{
               backgroundImage: `linear-gradient(
             0deg,
-            rgba(0, 0, 0, 50%) 0%,
+            rgba(0, 0, 0, 60%) 0%,
             transparent 100%
           ),url(${PictureUrl1})`,
             }}
-          >
-            <Chip label="景點" className={style.chip} />
-            <Typography variant="h6" color="textSecondary">
+          />
+          <div className={style.textContent}>
+            <Chip
+              label={Class ? Class || "美食類" : Class1 || "景點類"}
+              className={style.chip}
+              style={{ backgroundColor: getChipColor(Class1) }}
+            />
+            <Typography
+              variant="h6"
+              color="textSecondary"
+              className={style.locationName}
+            >
               {Name}
             </Typography>
             <Typography
@@ -108,8 +136,9 @@ const Card = ({
               className={style.locationInfo}
             >
               <Room fontSize="small" />
-              {getLocationName(ZipCode)}
+              {Location || getLocationName(ZipCode)}
             </Typography>
+
             <IconButton className={style.likeBtn}>
               {isLiked ? <Favorite color="error" /> : <FavoriteBorder />}
             </IconButton>
@@ -127,6 +156,7 @@ Card.propTypes = {
     ID: PropTypes.string,
     Name: PropTypes.string,
     ZipCode: PropTypes.string,
+    Class1: PropTypes.string,
     Picture: PropTypes.object,
   }),
 };

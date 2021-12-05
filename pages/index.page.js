@@ -5,7 +5,10 @@ import { Button, Typography } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 
 import GoText from "assets/GoText";
-import { CATEGORY_TYPES, CATEGORY_LOCATIONS } from "constants/category";
+import {
+  CATEGORY_TYPES_LIST,
+  CATEGORY_LOCATIONS_LIST,
+} from "constants/category";
 import AppContext from "contexts/AppContext";
 
 import DropDownButton from "components/DropDownButton";
@@ -52,7 +55,7 @@ export default function Home() {
             <DropDownButton
               labelName="區域"
               currentItem={location}
-              list={CATEGORY_LOCATIONS}
+              list={CATEGORY_LOCATIONS_LIST}
               onItemClick={(targetRange) => {
                 setLocation(targetRange);
               }}
@@ -62,7 +65,7 @@ export default function Home() {
             <DropDownButton
               labelName="種類"
               currentItem={type}
-              list={CATEGORY_TYPES}
+              list={CATEGORY_TYPES_LIST}
               onItemClick={(targetType) => {
                 setType(targetType);
               }}
