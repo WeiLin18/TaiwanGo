@@ -32,12 +32,24 @@ export const AppProvider = ({ children }) => {
   // https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/Taipei?$top=18&$skip=0&$format=JSON&$select=ID,Name,Address,Picture,Class1,Class2,Class3,OpenTime,TicketInfo&$filter=Picture/PictureUrl1%20ne%20null%20and%20(contains(Name,%27%E7%89%9B%27)%20or%20contains(Class1,%27%E7%89%9B%27)%20or%20contains(Class2,%27%E7%89%9B%27)%20or%20contains(Class3,%27%E7%89%9B%27))
 
   const fetchCardList = useCallback(
-    async ({ setState, typeValue, inputValue, itemCount = 32 }) => {
+    async ({
+      setState,
+      setIsLoaderShow,
+      typeValue,
+      inputValue,
+      page = 0,
+      itemCount = 32,
+    }) => {
       fetchListHandler({
         setState,
+        setIsLoaderShow,
         typeValue,
+        itemCount,
+        isConcat: page !== 0,
         APIFunc: apiTourism.getListApiFunc(typeValue),
-        APIQuery: `$top=${itemCount}&$select=ID%2CName%2CPicture%2C${
+        APIQuery: `$top=${itemCount}&$skip=${
+          page * itemCount
+        }&$select=ID%2CName%2CPicture%2C${
           typeValue === CATEGORY_TYPES.ACTIVITY ? "Location" : "ZipCode"
         }%2C${
           typeValue === CATEGORY_TYPES.RESTAURANT ? "Class" : "Class1"
@@ -48,20 +60,29 @@ export const AppProvider = ({ children }) => {
     [_APIErrorHandler]
   );
 
+  // setCardList((list) => list.concat(json));
+
   const fetchCityCardList = useCallback(
     async ({
       setState,
+      setIsLoaderShow,
       locationValue,
       typeValue,
       inputValue,
+      page = 0,
       itemCount = 32,
     }) => {
       fetchListHandler({
         setState,
+        setIsLoaderShow,
+        itemCount,
         city: locationValue,
         typeValue,
+        isConcat: page !== 0,
         APIFunc: apiTourism.getListApiFunc(typeValue, true),
-        APIQuery: `$top=${itemCount}&$select=ID%2CName%2CPicture%2C${
+        APIQuery: `$top=${itemCount}&$skip=${
+          page * itemCount
+        }&$select=ID%2CName%2CPicture%2C${
           typeValue === CATEGORY_TYPES.ACTIVITY ? "Location" : "ZipCode"
         }%2C${
           typeValue === CATEGORY_TYPES.RESTAURANT ? "Class" : "Class1"
@@ -72,11 +93,11 @@ export const AppProvider = ({ children }) => {
     [_APIErrorHandler]
   );
   const handleItemSearch = useCallback(
-    async ({ setState, locationValue, typeValue, inputValue }) => {
-      if (locationValue === "All") {
-        fetchCardList({ setState, typeValue, inputValue });
+    async (props) => {
+      if (props?.locationValue === "All") {
+        fetchCardList(props);
       } else {
-        fetchCityCardList({ setState, locationValue, typeValue, inputValue });
+        fetchCityCardList(props);
       }
     },
     [fetchCardList, fetchCityCardList]

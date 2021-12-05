@@ -1,6 +1,7 @@
 export const initialListState = {
   isLoading: false,
   isFetched: false,
+  isFetchAll: false,
   isError: false,
   data: [],
 };
