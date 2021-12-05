@@ -1,6 +1,40 @@
 import apiInstance from "./apiInstance";
+import { CATEGORY_TYPES } from "constants/category";
+import { DEFAULT_FILTER_QUERY } from "constants/service";
 
 const apiTourism = {
+  getFilterQuery: (inputValue) => {
+    if (!inputValue || inputValue.trim().length === 0) {
+      return DEFAULT_FILTER_QUERY;
+    }
+
+    const keywordList = inputValue.split(" ");
+    const keywordQuery = keywordList
+      .map((k) => `contains(Name,'${k}') or contains(Description,'${k}')`)
+      .join(" or ");
+
+    return `${DEFAULT_FILTER_QUERY} and (${keywordQuery})`;
+  },
+
+  getListApiFunc: (typeValue, isTargetCity = false) => {
+    switch (typeValue) {
+      case CATEGORY_TYPES.SCENICSPOT:
+        return isTargetCity
+          ? apiTourism.getCitySpotList
+          : apiTourism.getSpotList;
+      case CATEGORY_TYPES.RESTAURANT:
+        return isTargetCity
+          ? apiTourism.getCityRestaurantList
+          : apiTourism.getRestaurantList;
+      case CATEGORY_TYPES.ACTIVITY:
+        return isTargetCity
+          ? apiTourism.getCityActivityList
+          : apiTourism.getActivityList;
+
+      default:
+        return apiTourism.getCitySpotList;
+    }
+  },
   /**
    * @reference https://ptx.transportdata.tw/MOTC?t=Tourism&v=2#!/Tourism/TourismApi_ScenicSpot
    */
