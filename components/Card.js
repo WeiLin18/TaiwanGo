@@ -128,7 +128,11 @@ const Card = ({
             />
             <div className={style.textContent}>
               <Chip
-                label={Class ? Class || "美食類" : Class1 || "景點類"}
+                label={
+                  typeValue === CATEGORY_TYPES.RESTAURANT
+                    ? Class || "美食類"
+                    : Class1 || "景點類"
+                }
                 className={style.chip}
                 style={{ backgroundColor: getChipColor(Class1) }}
               />

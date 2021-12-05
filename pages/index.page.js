@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
 import { Button, Typography } from "@material-ui/core";
@@ -9,14 +9,16 @@ import {
   CATEGORY_TYPES_LIST,
   CATEGORY_LOCATIONS_LIST,
 } from "constants/category";
-import AppContext from "contexts/AppContext";
-
 import DropDownButton from "components/DropDownButton";
 import SearchBar from "components/SearchBar";
 import style from "./index.style";
+import useSearch from "hooks/useSearch";
 
-export default function Home() {
-  const { location, setLocation, type, setType } = useContext(AppContext);
+const HomePage = () => {
+  const router = useRouter();
+  const { location, setLocation, type, setType, inputValue, setInputValue } =
+    useSearch();
+
   return (
     <>
       <Head>
@@ -27,7 +29,7 @@ export default function Home() {
       <main className={style.root}>
         <div className={style.circle} />
         <div className={style.subtitle}>
-          <GoText width={300} priority={true} />
+          <GoText width={300} priority="true" />
           <Typography
             variant="h1"
             component="h3"
@@ -74,6 +76,10 @@ export default function Home() {
             />
             <SearchBar
               placeholder="輸入關鍵字..."
+              value={inputValue}
+              onValueChange={(vewValue) => {
+                setInputValue(vewValue);
+              }}
               customClassName={style.input}
             />
             <Button
@@ -81,6 +87,16 @@ export default function Home() {
               color="primary"
               fullWidth
               startIcon={<Search />}
+              onClick={() => {
+                router.push({
+                  pathname: "/list",
+                  query: {
+                    l: location.value,
+                    t: type.value,
+                    w: inputValue,
+                  },
+                });
+              }}
             >
               搜尋
             </Button>
@@ -89,4 +105,6 @@ export default function Home() {
       </main>
     </>
   );
-}
+};
+
+export default HomePage;

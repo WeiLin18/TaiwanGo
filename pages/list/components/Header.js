@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Button, Typography } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { css } from "@emotion/css";
@@ -10,6 +9,7 @@ import {
 } from "constants/category";
 import DropDownButton from "components/DropDownButton";
 import SearchBar from "components/SearchBar";
+import useSearch from "hooks/useSearch";
 
 const style = {
   root: css`
@@ -59,18 +59,9 @@ const style = {
   `,
 };
 
-const Header = ({ onSearch }) => {
-  const [location, setLocation] = useState(CATEGORY_LOCATIONS_LIST[0]);
-  const [type, setType] = useState(CATEGORY_TYPES_LIST[0]);
-  const [inputValue, setInputValue] = useState("");
-
-  useEffect(() => {
-    return () => {
-      setLocation(CATEGORY_LOCATIONS_LIST[0]);
-      setType(CATEGORY_TYPES_LIST[0]);
-      setInputValue("");
-    };
-  }, []);
+const Header = ({ onSearch, initialProps }) => {
+  const { location, setLocation, type, setType, inputValue, setInputValue } =
+    useSearch(initialProps);
 
   return (
     <header className={style.root}>

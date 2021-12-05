@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 import { Grid } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import { css } from "@emotion/css";
@@ -13,7 +14,6 @@ import Card from "../../components/Card";
 import Footer from "../../components/Footer";
 import { layout } from "styles";
 import EmptyView from "components/EmptyView";
-import { CATEGORY_TYPES_LIST } from "constants/category";
 
 const style = {
   list: css`
@@ -30,15 +30,19 @@ const style = {
 };
 
 const ListPage = () => {
+  const { query } = useRouter();
+  const { l, t, w } = query;
   const [cardList, setCardList] = useState(initialListState);
-  const { fetchCardList, handleItemSearch } = useContext(AppContext);
+  const { handleItemSearch } = useContext(AppContext);
 
   useEffect(() => {
-    fetchCardList({
+    handleItemSearch({
       setState: setCardList,
-      typeValue: CATEGORY_TYPES_LIST[0].value,
+      typeValue: t,
+      locationValue: l,
+      inputValue: w,
     });
-  }, [fetchCardList]);
+  }, [handleItemSearch, l, t, w]);
 
   const handleSearchClick = useCallback(
     (props) => {
@@ -49,7 +53,14 @@ const ListPage = () => {
 
   return (
     <main>
-      <Header onSearch={handleSearchClick} />
+      <Header
+        onSearch={handleSearchClick}
+        initialProps={{
+          initialLocation: l,
+          initialType: t,
+          initialInputValue: w,
+        }}
+      />
       <ul className={clx(layout.container, style.list)}>
         <Grid container spacing={2}>
           {getListUIState(cardList) === LIST_UI_STATE.LOADING &&
