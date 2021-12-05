@@ -59,27 +59,33 @@ export const getStaticPropHandlers =
       const pageInfo = res[0];
       const nearSpotList = await apiTourism.getNearList({
         typeValue: CATEGORY_TYPES.SCENICSPOT,
-        position: { ...pageInfo.Position },
+        position: pageInfo?.Position,
         targetId: id,
       });
       const nearRestaurantList = await apiTourism.getNearList({
         typeValue: CATEGORY_TYPES.RESTAURANT,
-        position: { ...pageInfo.Position },
+        position: pageInfo?.Position,
         targetId: id,
       });
 
       return {
         props: {
           ...pageInfo,
-          nearSpotList: getItemWithTypeList(nearSpotList),
-          nearRestaurantList: getItemWithTypeList(nearRestaurantList),
+          nearSpotList: getItemWithTypeList(
+            nearSpotList,
+            CATEGORY_TYPES.SCENICSPOT.toLowerCase()
+          ),
+          nearRestaurantList: getItemWithTypeList(
+            nearRestaurantList,
+            CATEGORY_TYPES.RESTAURANT.toLowerCase()
+          ),
         },
         revalidate: 10,
       };
     } catch (error) {
       return {
         redirect: {
-          destination: "/list",
+          destination: "/",
           permanent: false,
         },
       };

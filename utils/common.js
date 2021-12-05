@@ -1,5 +1,5 @@
 import zipCode from "constants/zipCode";
-import { CATEGORY_TYPES, CLASS_TYPES_LIST } from "constants/category";
+import {  CLASS_TYPES_LIST } from "constants/category";
 import { LIST_UI_STATE } from "constants/UIState";
 
 export const getListUIState = (listState) => {
@@ -39,8 +39,12 @@ export const getChipColor = (targetValue) => {
   return CLASS_TYPES_LIST.find((item) => item.value === targetValue)?.chipColor;
 };
 
-export const getItemWithTypeList = (list) =>
+export const findTargetObject = (target, prop, list) => {
+  return list.find((item) => item[prop] === target);
+};
+
+export const getItemWithTypeList = (list,type) =>
   list.map((item) => ({
     ...item,
-    typeValue: CATEGORY_TYPES.RESTAURANT.toLowerCase(),
+    typeValue: type,
   }));
