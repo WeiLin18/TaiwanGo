@@ -3,6 +3,7 @@ const palette = {
   yellowLight: "#FFE67B",
   yellowA11y: "#C68417",
   blue: "#00BBF0",
+  blueFade: "#00AAE0",
   blueLight: "#67EEFF",
   blueA11y: "#008BBD",
   red: "#FF6F6E",

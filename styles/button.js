@@ -1,4 +1,3 @@
-import { alpha } from "@material-ui/core/styles";
 import colors from "./colors";
 
 const button = {
@@ -30,7 +29,7 @@ const button = {
       backgroundColor: colors.primary,
     },
     "&&:hover": {
-      backgroundColor: alpha(colors.primary, 1.1),
+      backgroundColor: colors.blueFade,
     },
   },
   containedSecondary: {
