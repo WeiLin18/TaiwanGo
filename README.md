@@ -1,34 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TaiwanGo
+This site is developed by [Next.js](https://nextjs.org/) and [React.js](https://reactjs.org/), integrated third-party API from [MOTC Transport API](https://ptx.transportdata.tw/MOTC?t=Tourism&v=2).
+### Description:
+This is an informational website. On TaiwanGo, users can quickly search traveling information, like tourist spots, restaurants, and activities in Taiwan.
 
-## Getting Started
+### Demo link:
+https://quizzical-allen-890ea7.netlify.app/
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Screenshots
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![homePage](./docs/homePage.png)
+![listPage](./docs/listPage.png)
+![detailsPage](./docs/detailsPage.png)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Resource 
+- [Mockup](https://www.figma.com/file/YQ0Q6Gbj8YRVSntbVXcTPy/Week-1-%7C-%E5%8F%B0%E7%81%A3%E6%97%85%E9%81%8A%E6%99%AF%E9%BB%9E%E5%B0%8E%E8%A6%BD?node-id=0%3A1) (original version) - there are some adjustments on the site.
+- [API Swagger](https://ptx.transportdata.tw/MOTC?t=Tourism&v=2)
+### Technologies 
+- Base:  
+   - HTML / CSS / JavaScript
+- Framework: 
+   - [Next.js](https://nextjs.org/) / [React.js](https://reactjs.org/)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+#### Dependencies
+- [Material-UI](https://mui.com/)
+- [Leaflet](https://leafletjs.com/)
+- [Emotion](https://emotion.sh/docs/introduction)
+- [axios](https://github.com/axios/axios)
+- [jssha](https://github.com/Caligatio/jsSHA)
+- ... ( see `package.json` for details )
 
-## Learn More
+#### Dev Dependencies
+- [Husky](https://github.com/typicode/husky)
+- [Prettier](https://prettier.io/)
+- [ESlint](https://eslint.bootcss.com/)
+- [commitlint](https://github.com/conventional-changelog/commitlint)
+- [babel](https://babeljs.io/)
+- ... ( see `package.json` for details )
 
-To learn more about Next.js, take a look at the following resources:
+### Features
+-  `2.0.0` (in progress)
+   - integrate leaflet for map features
+   - add some animations in HomePage
+ - `1.0.0` (latest released)
+   - implement HomePage / ListPage / DetailsPage
+   - integrate API for fetching traveling information
+   - implement SSR in DetailsPage
+   - implement search / add to favorites / show more items / dropdown select / RWD
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Setup
+- Download or clone the repository
+- Install dependencies
+  ```bash
+  yarn install
+  ```
+- Run the development server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  ```bash
+  yarn dev
+  ```
+- Open [http://localhost:3000](http://localhost:3000) with your browser to see the homePage.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Contributors
+- Front-end developer: [Wei Lin](https://github.com/WeiLin18)
+- UX / UI designer: [Rey Chang](https://2021.thef2e.com/users/6296427084285739362)
+- Source API: [Taiwan Public Transport data eXchange](https://ptx.transportdata.tw/PTX/)
+
+
+
