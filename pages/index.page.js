@@ -10,7 +10,7 @@ import {
   CATEGORY_LOCATIONS_LIST,
 } from "constants/category";
 import DropDownButton from "components/DropDownButton";
-import SearchBar from "components/SearchBar";
+import SearchInput from "components/SearchInput";
 import style from "./index.style";
 import useSearch from "hooks/useSearch";
 
@@ -76,7 +76,7 @@ const HomePage = () => {
               fullWidth
               customClassName={style.input}
             />
-            <SearchBar
+            <SearchInput
               placeholder="輸入關鍵字..."
               value={inputValue}
               onValueChange={(vewValue) => {
