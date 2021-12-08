@@ -24,6 +24,9 @@ const menuClasses = {
     && {
       margin-top: 1px;
     }
+    & .MuiList-root {
+      max-height: 408px;
+    }
   `,
 };
 

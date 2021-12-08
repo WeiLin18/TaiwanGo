@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
-import Link from "next/link";
-import { Typography, Grid, IconButton, Button } from "@material-ui/core";
+import { Typography, Grid, Button } from "@material-ui/core";
 import {
-  ArrowBack,
   Room,
   Phone as PhoneIcon,
   AccessTimeRounded,
@@ -17,6 +15,7 @@ import { getLocationName } from "utils/common";
 import Card from "components/Card";
 import Footer from "components/Footer";
 import CardGroup from "components/CardGroup";
+import HomeLink from "components/HomeLink";
 import Hero from "../components/Hero";
 import { breakpoints, layout } from "styles";
 import useLikeToggle from "hooks/useLikeToggle";
@@ -168,20 +167,11 @@ const Details = ({
   return (
     <>
       <main className={style.root}>
+        <HomeLink otherLink="/list" />
         <Hero imgURL={Picture?.PictureUrl1} />
         <div className={style.mask}>
           <article className={clx(layout.container, style.article)}>
             <Typography variant="h4" component="h2" className={style.title}>
-              <Link
-                href={{
-                  pathname: `/list`,
-                }}
-                passHref
-              >
-                <IconButton className={style.backIcon}>
-                  <ArrowBack />
-                </IconButton>
-              </Link>
               {Name}
               <Button
                 variant="outlined"
@@ -225,7 +215,7 @@ const Details = ({
             <Grid container spacing={2}>
               {nearSpotList.map((item, index) => (
                 <Grid item xs={12} sm={6} md={3} component="li" key={index}>
-                  <Card cardInfo={item} />
+                  <Card cardInfo={item} isBlank={false} />
                 </Grid>
               ))}
             </Grid>
@@ -239,7 +229,7 @@ const Details = ({
             <Grid container spacing={2}>
               {nearRestaurantList.map((item, index) => (
                 <Grid item xs={12} sm={6} md={3} component="li" key={index}>
-                  <Card cardInfo={item} />
+                  <Card cardInfo={item} isBlank={false} />
                 </Grid>
               ))}
             </Grid>

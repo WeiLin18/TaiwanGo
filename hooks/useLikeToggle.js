@@ -7,8 +7,7 @@ const useLikeToggle = (ID) => {
   const isLiked = likeItemsList?.current?.some((itemID) => itemID === ID);
   const [isLike, setIsLike] = useState(isLiked);
 
-  const handleLikeToggle = (e) => {
-    e.stopPropagation();
+  const handleLikeToggle = () => {
     setIsLike(!isLike);
 
     const prev = likeItemsList.current;
