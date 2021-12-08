@@ -41,15 +41,18 @@ const apiTourism = {
     position,
     targetId,
     itemCount = 4,
+    distance = 2000,
     tokenSource,
   } = {}) => {
-    const APIQuery = `$top=${itemCount}&$select=ID%2CName%2CPicture%2C${
+    const APIQuery = `$top=${itemCount}&$select=ID%2CName%2CPosition%2CPicture%2C${
       typeValue === CATEGORY_TYPES.ACTIVITY ? "Location" : "ZipCode"
     }%2C${
       typeValue === CATEGORY_TYPES.RESTAURANT ? "Class" : "Class1"
     }&$spatialFilter=nearby(${position?.PositionLat},${
       position?.PositionLon
-    },2000)${DEFAULT_FILTER_QUERY} and ID ne '${targetId}'`;
+    },${distance})${DEFAULT_FILTER_QUERY}${
+      targetId ? ` and ID ne '${targetId}'` : ""
+    }`;
     return await apiTourism.getListApiFunc(typeValue)({
       APIQuery: APIQuery,
       tokenSource: tokenSource,
