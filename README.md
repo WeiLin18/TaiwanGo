@@ -11,6 +11,8 @@ https://quizzical-allen-890ea7.netlify.app/
 
 ![homePage](./docs/homePage.png)
 ![listPage](./docs/listPage.png)
+![mapPage](./docs/mapPage.png)
+
 ![detailsPage](./docs/detailsPage.png)
 
 ### Resource 
@@ -29,6 +31,7 @@ https://quizzical-allen-890ea7.netlify.app/
 - [Emotion](https://emotion.sh/docs/introduction)
 - [axios](https://github.com/axios/axios)
 - [jssha](https://github.com/Caligatio/jsSHA)
+- [swiper](https://swiperjs.com/)
 - ... ( see `package.json` for details )
 
 #### Dev Dependencies
@@ -40,15 +43,47 @@ https://quizzical-allen-890ea7.netlify.app/
 - ... ( see `package.json` for details )
 
 ### Features
--  `2.0.0` (in progress)
+-  `2.0.0` ( latest released )
    - integrate leaflet for map features
-   - add some animations in HomePage
- - `1.0.0` (latest released)
+   - implement MapPage
+ - `1.0.0` ( 2021.12.05 released )
    - implement HomePage / ListPage / DetailsPage
    - integrate API for fetching traveling information
    - implement SSR in DetailsPage
    - implement search / add to favorites / show more items / dropdown select / RWD
 
+### Folder structure
+```
+    .
+    ├── asset                        # media assets, like icons, etc..
+    ├── components                   # global components
+    │    ├── Card.js             
+    │    └── ...             
+    ├── configs                      # Configs setting for some dependencies
+    ├── constants                    # Consistent values
+    ├── contexts                     # Common context API and context provider 
+    ├── docs                         # Documentation files 
+    ├── hooks                        # Utility hooks for encapsulating logic
+    ├── modules                      # API calls and business logic
+    ├── page                         # Next.js page folder with built-in route support
+    │    ├── list 
+    │    │   ├── activity
+    │    │   │   └── [id].page.js    # Details page file
+    │    │   ├── components          # Utility components under list page
+    │    │   ├── map                  
+    │    │   │   ├── index.page.js   # Map page file
+    │    │   │   └── ...
+    │    │   ├── ...                  
+    │    │   └── index.page.js       # List page file
+    │    ├── index.page.js           # Home page file
+    │    ├── index.style.js          # Home page style file
+    │    └── ...   
+    ├── public                       # Static files, like images, etc..
+    ├── styles                       # Global styles for material-UI theme
+    ├── utils                        # Tools and utilities
+    └──  ...
+
+```
 ### Setup
 - Download or clone the repository
 - Install dependencies

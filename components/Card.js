@@ -47,9 +47,10 @@ const style = {
     height: 100%;
   `,
   textContent: css`
+    /* position: absolute; */
     width: 100%;
+    height: 100%;
     padding: 12px;
-    position: relative;
     z-index: 10;
   `,
   skeleton: css`
@@ -103,6 +104,7 @@ const Card = ({
     Picture: { PictureUrl1: "" },
     typeValue: CATEGORY_TYPES.SCENICSPOT.toLowerCase(),
   },
+  isBlank = true,
   ...props
 }) => {
   const { ID, Name, ZipCode, Location, Class, Class1, Picture, typeValue } =
@@ -122,61 +124,67 @@ const Card = ({
       ) : (
         <Link
           href={{
-            pathname: `/list/${typeValue}/${ID}`,
+            pathname: `/list/${typeValue.toLowerCase()}/${ID}`,
           }}
           passHref
         >
-          <MuiCard className={clx(style.root, style.paper)} {...props}>
-            <div
-              className={clx(style.paper, style.cover, "cover")}
-              style={{
-                backgroundImage: `linear-gradient(
+          <a target={isBlank ? "_blank" : null} href="/#">
+            <MuiCard className={clx(style.root, style.paper)} {...props}>
+              <div
+                className={clx(style.paper, style.cover, "cover")}
+                style={{
+                  backgroundImage: `linear-gradient(
             0deg,
             rgba(0, 0, 0, 60%) 0%,
             transparent 100%
           ),url(${PictureUrl1})`,
-              }}
-            />
-            <div className={style.textContent}>
-              <Chip
-                label={
-                  typeValue === CATEGORY_TYPES.RESTAURANT
-                    ? Class || "美食類"
-                    : Class1 || "景點類"
-                }
-                className={style.chip}
-                style={{ backgroundColor: getChipColor(Class1) }}
+                }}
               />
-              <Typography
-                variant="h6"
-                color="textSecondary"
-                className={style.locationName}
-              >
-                {Name}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className={style.locationInfo}
-              >
-                <Room fontSize="small" />
-                {Location || getLocationName(ZipCode)}
-              </Typography>
-              <Tooltip
-                title={isLike ? "取消收藏" : "加入收藏"}
-                placement="top"
-                enterDelay={500}
-              >
-                <IconButton
-                  className={style.likeBtn}
-                  onClick={handleLikeToggle}
+              <div className={style.textContent}>
+                <Chip
+                  label={
+                    typeValue === CATEGORY_TYPES.RESTAURANT
+                      ? Class || "美食類"
+                      : Class1 || "景點類"
+                  }
+                  className={style.chip}
+                  style={{ backgroundColor: getChipColor(Class1) }}
+                />
+                <Typography
+                  variant="h6"
+                  color="textSecondary"
+                  className={style.locationName}
                 >
-                  {isLike ? <Favorite /> : <FavoriteBorder />}
-                </IconButton>
-              </Tooltip>
-            </div>
-          </MuiCard>
+                  {Name}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                  className={style.locationInfo}
+                >
+                  <Room fontSize="small" />
+                  {Location || getLocationName(ZipCode)}
+                </Typography>
+                <Tooltip
+                  title={isLike ? "取消收藏" : "加入收藏"}
+                  placement="top"
+                  enterDelay={500}
+                >
+                  <IconButton
+                    className={style.likeBtn}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      handleLikeToggle();
+                    }}
+                  >
+                    {isLike ? <Favorite /> : <FavoriteBorder />}
+                  </IconButton>
+                </Tooltip>
+              </div>
+            </MuiCard>
+          </a>
         </Link>
       )}
     </>
