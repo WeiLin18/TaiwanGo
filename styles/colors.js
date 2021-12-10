@@ -12,6 +12,7 @@ const palette = {
   green: "#00BA88",
   greenLight: "#F2FFFB",
   greenAlly: "#00966D",
+  purple: "#7879F1",
 };
 
 const status = {

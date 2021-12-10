@@ -1,16 +1,12 @@
-import { Button, Typography } from "@material-ui/core";
-import { Search } from "@material-ui/icons";
+import { IconButton, Tooltip, Typography } from "@material-ui/core";
+import Link from "next/link";
 import { css } from "@emotion/css";
-import clx from "classnames";
 
-import {
-  CATEGORY_TYPES_LIST,
-  CATEGORY_LOCATIONS_LIST,
-} from "constants/category";
-import DropDownButton from "components/DropDownButton";
+import { colors, breakpoints } from "styles";
 import SearchBar from "components/SearchBar";
 import useSearch from "hooks/useSearch";
-import { breakpoints } from "styles";
+import MapIcon from "assets/MapIcon";
+import HomeLink from "components/HomeLink";
 
 const style = {
   root: css`
@@ -42,46 +38,41 @@ const style = {
       }
     }
   `,
-  form: css`
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 60%;
-    transform: translate(-50%, 50%);
-    display: flex;
-
-    @media (max-width: ${breakpoints.pad}) {
-      width: 90%;
-    }
-    @media (max-width: ${breakpoints.phone}) {
-      bottom: 28px;
-      flex-wrap: wrap;
-    }
-  `,
-
-  input: css`
-    && {
-      margin-right: 16px;
-      margin-bottom: 16px;
-    }
-  `,
-  boxShadow: css`
+  backIcon: css`
     &&& {
+      position: absolute;
+      z-index: 100;
+      right: 20px;
+      top: 20px;
+      background-color: ${colors.secondary};
       box-shadow: 0px 2px 10px -1px rgb(0 0 0 / 20%);
     }
-  `,
-  flex: css`
-    display: flex;
-    width: 100%;
+    &&:hover svg {
+      opacity: 0.8;
+    }
   `,
 };
 
 const Header = ({ onSearch, initialProps }) => {
   const { location, setLocation, type, setType, inputValue, setInputValue } =
     useSearch(initialProps);
-
   return (
     <header className={style.root}>
+      <HomeLink />
+      <Link
+        href={{
+          pathname: `/list/map`,
+        }}
+        passHref
+      >
+        <a target="_blank" href="/#">
+          <Tooltip title="地圖找景點" placement="left">
+            <IconButton className={style.backIcon}>
+              <MapIcon />
+            </IconButton>
+          </Tooltip>
+        </a>
+      </Link>
       <Typography variant="h2" className={style.title}>
         台
         <Typography variant="h5" component="span" className={style.subtitle}>
@@ -89,51 +80,15 @@ const Header = ({ onSearch, initialProps }) => {
         </Typography>
         灣
       </Typography>
-      <form className={style.form}>
-        <DropDownButton
-          labelName="區域"
-          currentItem={location}
-          list={CATEGORY_LOCATIONS_LIST}
-          onItemClick={(targetRange) => {
-            setLocation(targetRange);
-          }}
-          customClassName={clx(style.input, style.boxShadow)}
-        />
-        <DropDownButton
-          labelName="種類"
-          currentItem={type}
-          list={CATEGORY_TYPES_LIST}
-          onItemClick={(targetType) => {
-            setType(targetType);
-          }}
-          customClassName={clx(style.input, style.boxShadow)}
-        />
-        <div className={style.flex}>
-          <SearchBar
-            placeholder="輸入關鍵字..."
-            value={inputValue}
-            onValueChange={(vewValue) => {
-              setInputValue(vewValue);
-            }}
-            customClassName={clx(style.input, style.boxShadow)}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            className={style.boxShadow}
-            startIcon={<Search />}
-            onClick={() => {
-              onSearch({
-                locationValue: location.value,
-                typeValue: type.value,
-                inputValue,
-              });
-            }}
-          >
-            搜尋
-          </Button>
-        </div>
-      </form>
+      <SearchBar
+        onSearch={onSearch}
+        location={location}
+        setLocation={setLocation}
+        type={type}
+        setType={setType}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
     </header>
   );
 };
