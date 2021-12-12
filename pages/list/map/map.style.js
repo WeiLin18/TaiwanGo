@@ -33,13 +33,13 @@ export const style = {
   list: css`
     && {
       pointer-events: none;
-      padding: 20px;
+      padding: 0 20px;
       max-width: 100%;
       position: fixed;
-      bottom: 40px;
+      bottom: 60px;
       z-index: 1200;
       @media (max-width: ${breakpoints.phone}) {
-        bottom: 60px;
+        bottom: 0px;
       }
     }
   `,
@@ -48,24 +48,27 @@ export const style = {
       pointer-events: none;
       overflow: visible;
     }
-    & .swiper-pagination {
+    && .swiper-pagination {
       bottom: -30px;
       pointer-events: initial;
+      @media (max-width: ${breakpoints.phone}) {
+        display: none;
+      }
     }
-    & .swiper-slide {
+    && .swiper-slide {
       pointer-events: initial;
     }
-    & .swiper-pagination-bullet {
+    && .swiper-pagination-bullet {
       width: 12px;
       height: 12px;
       background-color: #fff;
       opacity: 1;
       box-shadow: 0px 2px 10px -1px rgb(0 0 0 / 50%);
     }
-    & .swiper-pagination-bullet-active {
+    && .swiper-pagination-bullet-active {
       background-color: ${colors.textPrimary};
     }
-    & .swiper-slide-active {
+    && .swiper-slide-active {
       transform: translateY(-20px);
     }
   `,
