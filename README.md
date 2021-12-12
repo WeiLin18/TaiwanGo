@@ -43,7 +43,7 @@ https://quizzical-allen-890ea7.netlify.app/
 - ... ( see `package.json` for details )
 
 ### Features
--  `2.0.0` ( latest released )
+-  `2.0.1` ( latest released )
    - integrate leaflet for map features
    - implement MapPage
  - `1.0.0` ( 2021.12.05 released )

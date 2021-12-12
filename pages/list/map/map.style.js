@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/css";
-import { colors } from "styles";
+import { breakpoints, colors } from "styles";
 
 export const style = {
   searchBar: css`
@@ -19,7 +19,7 @@ export const style = {
       box-shadow: 0px 2px 10px -1px rgb(0 0 0 / 20%);
     }
     &:hover {
-      z-index: 11000;
+      z-index: 1100;
     }
     &:before {
       display: none;
@@ -27,7 +27,7 @@ export const style = {
   `,
   activeTooltip: css`
     &&& {
-      z-index: 10000;
+      z-index: 1000;
     }
   `,
   list: css`
@@ -37,11 +37,14 @@ export const style = {
       max-width: 100%;
       position: fixed;
       bottom: 40px;
-      z-index: 20000;
+      z-index: 1200;
+      @media (max-width: ${breakpoints.phone}) {
+        bottom: 60px;
+      }
     }
   `,
   swiper: css`
-    & {
+    && {
       pointer-events: none;
       overflow: visible;
     }
