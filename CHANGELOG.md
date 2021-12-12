@@ -1,3 +1,13 @@
+## <small>2.0.2 (2021-12-12)</small>
+
+* fix: adjust mobile spacing in Map Page ([15f6c6b](https://github.com/WeiLin18/TaiwanGo/commit/15f6c6b))
+
+## <small>2.0.1 (2021-12-12)</small>
+
+* fix: adjust z-index style in Map Page ([8444c92](https://github.com/WeiLin18/TaiwanGo/commit/8444c92))
+
+
+
 # [2.0.0](https://github.com/WeiLin18/TaiwanGo/compare/1.0.0...2.0.0) (2021-12-08)
 
 
