@@ -1,4 +1,4 @@
-import colors from "./colors";
+import colors, { MuiPalette } from "./colors";
 import breakpoints from "./breakpoints";
 import button from "./button";
 import card from "./card";
@@ -8,6 +8,7 @@ import typography, { bodyFontStyle } from "./typography";
 
 export {
   colors,
+  MuiPalette,
   breakpoints,
   bodyFontStyle,
   typography,
