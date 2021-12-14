@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Head from "next/head";
 import { createTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 import { SnackbarProvider } from "notistack";
 
@@ -17,20 +18,27 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <SnackbarProvider
-        maxSnack={3}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-      >
-        <AppProvider>
-          <Component {...pageProps} />
-        </AppProvider>
-      </SnackbarProvider>
-    </ThemeProvider>
+    <>
+      <Head>
+        <title>TaiwanGo</title>
+        <meta name="description" content="Taiwan travel information" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <SnackbarProvider
+          maxSnack={3}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          <AppProvider>
+            <Component {...pageProps} />
+          </AppProvider>
+        </SnackbarProvider>
+      </ThemeProvider>
+    </>
   );
 }
 
