@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import Head from "next/head";
 import Image from "next/image";
 import { Button, Typography } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
@@ -21,11 +20,6 @@ const HomePage = () => {
 
   return (
     <>
-      <Head>
-        <title>TaiwanGo</title>
-        <meta name="description" content="Taiwan travel information" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <main className={style.root}>
         <div className={style.circle} />
         <div className={style.subtitle}>
