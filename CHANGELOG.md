@@ -1,11 +1,9 @@
-## <small>2.0.3 (2021-12-13)</small>
+## <small>2.0.3 (2021-12-14)</small>
 
-* refactor: move theme palette setting to colors ([c8dec1b](https://github.com/WeiLin18/TaiwanGo/commit/c8dec1b))
-* fix: adjust mobile spacing in Map Page ([15f6c6b](https://github.com/WeiLin18/TaiwanGo/commit/15f6c6b))
-* fix: clean console warning ([4847d28](https://github.com/WeiLin18/TaiwanGo/commit/4847d28))
-* fix: fix Material-UI SSR flickering issues ([0089cc6](https://github.com/WeiLin18/TaiwanGo/commit/0089cc6))
-
-
+* perf: improve SEO ([9c4b7f4](https://github.com/WeiLin18/TaiwanGo/commit/9c4b7f4))
+* refactor: move theme palette setting to colors ([1621432](https://github.com/WeiLin18/TaiwanGo/commit/1621432))
+* fix: clean console warning ([89d1b8a](https://github.com/WeiLin18/TaiwanGo/commit/89d1b8a))
+* fix: fix Material-UI SSR flickering issues ([aa83d3b](https://github.com/WeiLin18/TaiwanGo/commit/aa83d3b))
 
 ## <small>2.0.2 (2021-12-12)</small>
 
