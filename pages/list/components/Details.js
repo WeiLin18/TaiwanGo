@@ -1,3 +1,4 @@
+import Head from "next/head";
 import PropTypes from "prop-types";
 import { Typography, Grid, Button } from "@material-ui/core";
 import {
@@ -166,6 +167,12 @@ const Details = ({
   const { isLike, handleLikeToggle } = useLikeToggle(ID);
   return (
     <>
+      <Head>
+        <title>{`${Name} - TaiwanGo`}</title>
+        {DescriptionDetail && (
+          <meta name="description" content={DescriptionDetail}></meta>
+        )}
+      </Head>
       <main className={style.root}>
         <HomeLink otherLink="/list" />
         <Hero imgURL={Picture?.PictureUrl1} />

@@ -29,6 +29,29 @@ const text = {
   textHint: "#4D6380",
 };
 
+export const MuiPalette = {
+  primary: {
+    main: status.primary,
+    contrastText: "#fff",
+  },
+  secondary: {
+    main: status.secondary,
+    contrastText: "#fff",
+  },
+  error: {
+    main: status.error,
+  },
+  success: {
+    main: status.success,
+  },
+  text: {
+    primary: text.textPrimary,
+    secondary: text.textSecondary,
+    default: text.default,
+    hint: text.textHint,
+  },
+};
+
 const color = {
   ...palette,
   ...status,

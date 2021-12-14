@@ -1,6 +1,5 @@
-import { createTheme } from "@material-ui/core";
 import {
-  colors,
+  MuiPalette,
   bodyFontStyle,
   card as MuiCard,
   chip as MuiChip,
@@ -8,29 +7,8 @@ import {
   typography as MuiTypography,
 } from "styles";
 
-export default createTheme({
-  palette: {
-    primary: {
-      main: colors.primary,
-      contrastText: "#fff",
-    },
-    secondary: {
-      main: colors.secondary,
-      contrastText: "#fff",
-    },
-    error: {
-      main: colors.error,
-    },
-    success: {
-      main: colors.success,
-    },
-    text: {
-      primary: colors.textPrimary,
-      secondary: colors.textSecondary,
-      default: colors.default,
-      hint: colors.textHint,
-    },
-  },
+const themeConfig = {
+  palette: MuiPalette,
   overrides: {
     "@global": {
       body: {
@@ -42,4 +20,6 @@ export default createTheme({
     MuiChip,
     MuiTypography,
   },
-});
+};
+
+export default themeConfig;
