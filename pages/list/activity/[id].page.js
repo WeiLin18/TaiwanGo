@@ -1,15 +1,22 @@
 import PropTypes from "prop-types";
 import apiTourism from "modules/tourism";
 import Details from "../components/Details";
+import { CATEGORY_TYPES } from "constants/category";
 import { getStaticPathsHandler, getStaticPropHandlers } from "utils/handler";
 
 const DetailsPage = (props) => {
   return <Details {...props} />;
 };
 
-export const getStaticPaths = getStaticPathsHandler(apiTourism.getActivityList);
+export const getStaticPaths = getStaticPathsHandler(
+  apiTourism.getActivityList,
+  CATEGORY_TYPES.ACTIVITY
+);
 
-export const getStaticProps = getStaticPropHandlers(apiTourism.getActivityList);
+export const getStaticProps = getStaticPropHandlers(
+  apiTourism.getActivityList,
+  CATEGORY_TYPES.ACTIVITY
+);
 
 DetailsPage.propTypes = {
   Name: PropTypes.string,

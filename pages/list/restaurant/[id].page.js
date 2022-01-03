@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import apiTourism from "modules/tourism";
 import Details from "../components/Details";
+import { CATEGORY_TYPES } from "constants/category";
 import { getStaticPathsHandler, getStaticPropHandlers } from "utils/handler";
 
 const DetailsPage = (props) => {
@@ -8,11 +9,13 @@ const DetailsPage = (props) => {
 };
 
 export const getStaticPaths = getStaticPathsHandler(
-  apiTourism.getRestaurantList
+  apiTourism.getRestaurantList,
+  CATEGORY_TYPES.RESTAURANT
 );
 
 export const getStaticProps = getStaticPropHandlers(
-  apiTourism.getRestaurantList
+  apiTourism.getRestaurantList,
+  CATEGORY_TYPES.RESTAURANT
 );
 
 DetailsPage.propTypes = {

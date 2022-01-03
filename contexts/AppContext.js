@@ -57,11 +57,11 @@ export const AppProvider = ({ children }) => {
         APIFunc: apiTourism.getListApiFunc(typeValue),
         APIQuery: `$top=${itemCount}&$skip=${
           page * itemCount
-        }&$select=ID%2CName%2CPicture%2C${
+        }&$select=${typeValue}ID%2C${typeValue}Name%2CPicture%2C${
           typeValue === CATEGORY_TYPES.ACTIVITY ? "Location" : "ZipCode"
         }%2C${
           typeValue === CATEGORY_TYPES.RESTAURANT ? "Class" : "Class1"
-        }${apiTourism.getFilterQuery(inputValue)}`,
+        }${apiTourism.getFilterQuery(inputValue, typeValue)}`,
         APIErrorHandler: _APIErrorHandler,
       });
     },
@@ -90,11 +90,11 @@ export const AppProvider = ({ children }) => {
         APIFunc: apiTourism.getListApiFunc(typeValue, true),
         APIQuery: `$top=${itemCount}&$skip=${
           page * itemCount
-        }&$select=ID%2CName%2CPicture%2C${
+        }&$select=${typeValue}ID%2C${typeValue}Name%2CPicture%2C${
           typeValue === CATEGORY_TYPES.ACTIVITY ? "Location" : "ZipCode"
         }%2C${
           typeValue === CATEGORY_TYPES.RESTAURANT ? "Class" : "Class1"
-        }${apiTourism.getFilterQuery(inputValue)}`,
+        }${apiTourism.getFilterQuery(inputValue, typeValue)}`,
         APIErrorHandler: _APIErrorHandler,
       });
     },
