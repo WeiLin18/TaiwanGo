@@ -3,18 +3,27 @@ import { CATEGORY_TYPES } from "constants/category";
 import { DEFAULT_FILTER_QUERY } from "constants/service";
 
 const apiTourism = {
-  getFilterQuery: (inputValue) => {
+  getFilterQuery: (inputValue, prefix) => {
     if (!inputValue || inputValue.trim().length === 0) {
       return DEFAULT_FILTER_QUERY;
     }
 
     const keywordList = inputValue.split(" ");
     const keywordQuery = keywordList
-      .map((k) => `contains(Name,'${k}') or contains(Description,'${k}')`)
+      .map(
+        (k) => `contains(${prefix}Name,'${k}') or contains(Description,'${k}')`
+      )
       .join(" or ");
 
     return `${DEFAULT_FILTER_QUERY} and (${keywordQuery})`;
   },
+
+  getFormatKeyName: (list, prefix) =>
+    list.map((item) => ({
+      ...item,
+      ID: item[`${prefix}ID`],
+      Name: item[`${prefix}Name`],
+    })),
 
   getListApiFunc: (typeValue, isTargetCity = false) => {
     switch (typeValue) {
@@ -44,14 +53,14 @@ const apiTourism = {
     distance = 2000,
     tokenSource,
   } = {}) => {
-    const APIQuery = `$top=${itemCount}&$select=ID%2CName%2CPosition%2CPicture%2C${
+    const APIQuery = `$top=${itemCount}&$select=${typeValue}ID%2C${typeValue}Name%2CPosition%2CPicture%2C${
       typeValue === CATEGORY_TYPES.ACTIVITY ? "Location" : "ZipCode"
     }%2C${
       typeValue === CATEGORY_TYPES.RESTAURANT ? "Class" : "Class1"
     }&$spatialFilter=nearby(${position?.PositionLat},${
       position?.PositionLon
     },${distance})${DEFAULT_FILTER_QUERY}${
-      targetId ? ` and ID ne '${targetId}'` : ""
+      targetId ? ` and ${typeValue}ID ne '${targetId}'` : ""
     }`;
     return await apiTourism.getListApiFunc(typeValue)({
       APIQuery: APIQuery,
@@ -66,7 +75,7 @@ const apiTourism = {
       `/v2/Tourism/ScenicSpot?${APIQuery}&$format=JSON`
     );
     if (status === 200) {
-      return data;
+      return apiTourism.getFormatKeyName(data, "ScenicSpot");
     }
   },
   /**
@@ -77,7 +86,7 @@ const apiTourism = {
       `/v2/Tourism/ScenicSpot/${city}?${APIQuery}&$format=JSON`
     );
     if (status === 200) {
-      return data;
+      return apiTourism.getFormatKeyName(data, "ScenicSpot");
     }
   },
   /**
@@ -88,7 +97,7 @@ const apiTourism = {
       `/v2/Tourism/Restaurant?${APIQuery}&$format=JSON`
     );
     if (status === 200) {
-      return data;
+      return apiTourism.getFormatKeyName(data, "Restaurant");
     }
   },
 
@@ -104,7 +113,7 @@ const apiTourism = {
       `/v2/Tourism/Restaurant/${city}?${APIQuery}&$format=JSON`
     );
     if (status === 200) {
-      return data;
+      return apiTourism.getFormatKeyName(data, "Restaurant");
     }
   },
   /**
@@ -115,7 +124,7 @@ const apiTourism = {
       `/v2/Tourism/Activity?${APIQuery}&$format=JSON`
     );
     if (status === 200) {
-      return data;
+      return apiTourism.getFormatKeyName(data, "Activity");
     }
   },
 
@@ -131,7 +140,7 @@ const apiTourism = {
       `/v2/Tourism/Activity/${city}?${APIQuery}&$format=JSON`
     );
     if (status === 200) {
-      return data;
+      return apiTourism.getFormatKeyName(data, "Activity");
     }
   },
 };

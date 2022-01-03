@@ -60,14 +60,15 @@ export const fetchListHandler = async ({
  * For details page getStaticProp func
  *
  * @param {function} APIFunc fetch API function
+ * @param {string} prefix adding to query key
  */
 export const getStaticPropHandlers =
-  (APIFunc) =>
+  (APIFunc, prefix) =>
   async ({ params }) => {
     const { id } = params;
     try {
       const res = await APIFunc({
-        APIQuery: `${DEFAULT_FILTER_QUERY} and ID eq '${id}'`,
+        APIQuery: `${DEFAULT_FILTER_QUERY} and ${prefix}ID eq '${id}'`,
       });
 
       const pageInfo = res[0];
@@ -110,11 +111,12 @@ export const getStaticPropHandlers =
  * For details page getStaticPaths func
  *
  * @param {function} APIFunc fetch API function
+ * @param {string} prefix adding to query key
  */
-export const getStaticPathsHandler = (APIFunc) => async () => {
+export const getStaticPathsHandler = (APIFunc, prefix) => async () => {
   try {
     const res = await APIFunc({
-      APIQuery: `${DEFAULT_FILTER_QUERY}&$select=ID&$top=${BUILD_ITEM_COUNT}`,
+      APIQuery: `${DEFAULT_FILTER_QUERY}&$select=${prefix}ID&$top=${BUILD_ITEM_COUNT}`,
     });
 
     const paths = res.map((item) => ({
