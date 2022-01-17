@@ -1,3 +1,7 @@
+## <small>2.0.5 (2022-01-17)</small>
+
+- fix: adjust theme injection ([b2df1ba](https://github.com/WeiLin18/TaiwanGo/commit/b2df1ba))
+
 ## <small>2.0.4 (2022-01-03)</small>
 
 - fix: add prefix to API query for API adjustment ([2093d0c](https://github.com/WeiLin18/TaiwanGo/commit/2093d0c))
