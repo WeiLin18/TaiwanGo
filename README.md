@@ -21,7 +21,7 @@ https://quizzical-allen-890ea7.netlify.app/
 ### Resource
 
 - [Mockup](https://www.figma.com/file/YQ0Q6Gbj8YRVSntbVXcTPy/Week-1-%7C-%E5%8F%B0%E7%81%A3%E6%97%85%E9%81%8A%E6%99%AF%E9%BB%9E%E5%B0%8E%E8%A6%BD?node-id=0%3A1) (original version) - there are some adjustments on the site.
-- [API Swagger](https://ptx.transportdata.tw/MOTC?t=Tourism&v=2)
+- [API Swagger](https://ptx.transportdata.tw/MOTC/?t=Tourism&v=2&urls.primaryName=%E8%A7%80%E5%85%89V2#/Tourism)
 
 ### Technologies
 
