@@ -4,7 +4,7 @@ This site is developed by [Next.js](https://nextjs.org/) and [React.js](https://
 
 ### Description:
 
-This is an informational website. On TaiwanGo, users can quickly search traveling information, like tourist spots, restaurants, and activities in Taiwan.
+On TaiwanGo, users can quickly search for traveling information, like tourist spots, restaurants, and activities in Taiwan.
 
 ### Demo link:
 
